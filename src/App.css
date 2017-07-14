@@ -30,9 +30,12 @@
   cursor: pointer;
 }
 .selected{
+  margin:0.5em;
   background-color: #eee;
   color: #ddd;
   cursor: not-allowed;
+  width:84px;
+
 }
 .used{
   cursor: not-allowed;
