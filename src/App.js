@@ -81,8 +81,16 @@ const Numbers=(props)=> {
 
     )
 }
-class App extends Component {
-	static randomNumber = () => 1 + Math.floor(Math.random() * 9)
+
+const DoneFrame=(props)=>{
+	return(
+		<div>
+			{props.doneStatus}
+		</div>
+	)
+}
+class App extends React.Component {
+	static randomNumber = () =>  1 + Math.floor(Math.random() * 9)
 	constructor(){
 		super()
         this.state={
@@ -90,7 +98,8 @@ class App extends Component {
 			randomNumOfStars:App.randomNumber(),
             answerIsCorrect:null,
 			usedNumbers:[],
-			redraws:5
+			redraws:5,
+			doneStatus:'Game Over'
         }
 
         this.selectNumber = (clickedNumber)=>{
@@ -118,7 +127,7 @@ class App extends Component {
 	}
 
   render() {
-		const {selectedNumbers, randomNumOfStars, answerIsCorrect, usedNumbers}=this.state
+		const {selectedNumbers, randomNumOfStars, answerIsCorrect, usedNumbers, doneStatus}=this.state
 	return (
 	  <div className="container-fluid">
 		<div className="row App-header" style={{height:240}} >
@@ -171,11 +180,13 @@ class App extends Component {
 			  <div className="col-lg-4">
 			  </div>
 			  <div className="col-lg-4 App-intro">
-				  <Numbers selectedNumbers={selectedNumbers}
-						   selectNumber={this.selectNumber.bind(this)}
-				           usedNumbers={usedNumbers}/>
+				  {doneStatus?<DoneFrame doneStatus={doneStatus}/>:<Numbers selectedNumbers={selectedNumbers}
+													selectNumber={this.selectNumber.bind(this)}
+													usedNumbers={usedNumbers}/>}
+
 			  </div>
 		  </div>
+
 	  </div>
 	);
   }
